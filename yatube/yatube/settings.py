@@ -55,7 +55,10 @@ ROOT_URLCONF = "yatube.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        # Добавлено: Искать шаблоны на уровне проекта
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
+        # Оставляем True: шаблоны встроенных приложений (например, админки)
+        # нужно искать в директориях приложений
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -63,9 +66,9 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-            ],
+            ]
         },
-    },
+    }
 ]
 
 WSGI_APPLICATION = "yatube.wsgi.application"
