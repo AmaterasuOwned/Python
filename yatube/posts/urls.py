@@ -1,11 +1,12 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
+app_name = "posts"
+
 urlpatterns = [
-    # Главная страница
-    path("", views.index),
-    # Страница со списком постов
-    path("posts/", views.posts_list),
-    # Посты от группы
-    path("group/<slug:pk>/", views.group_posts),
+    path(
+        "",
+        views.index,
+    ),
+    path("posts/", views.posts_list, name="posts_list"),
 ]
