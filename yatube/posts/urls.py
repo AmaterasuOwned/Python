@@ -9,4 +9,5 @@ urlpatterns = [
         views.index,
     ),
     path("posts/", views.posts_list, name="posts_list"),
+    path("group/", views.group_posts, name="group_list"),
 ]

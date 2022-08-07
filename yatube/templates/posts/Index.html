@@ -1,6 +1,7 @@
 <!DOCTYPE html> <!-- Используется html 5 версии -->
 {% extends 'base.html' %}
 {% load static %}
+{% if post.group %}
 {% block content %}
 <html lang="ru"> <!-- Язык сайта - русский -->
   <head>
@@ -24,7 +25,7 @@
       <!-- В дальнейшем тут будет создано полноценное меню -->
       <nav class="navbar navbar-light" style="background-color: lightskyblue">
         <div class="container">
-          <a class="navbar-brand" href="veiw.index.html">
+          <a class="navbar-brand" href="">
             <img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
             <!-- тег span используется для добавления нужных стилей отдельным участкам текста -->
             <span style="color:red">Ya</span>tube
@@ -77,7 +78,9 @@
             накрылъ Крыжановскій, что, признаюсь, было мнѣ не совсѣмъ пріятно. Упрекаю себя за 
             безхарактерность, что не высидѣлъ дома, и зa праздность цѣлаго дня. Это главный пунктъ. (2)
           </p>
-          <a href="posts">все записи группы</a>
+          {% if post.group %}   
+          <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
+          {% endif %} 
         </article>
         <hr>
         <article>
@@ -113,3 +116,4 @@
   </body>
 </html>
 {% endblock content %}
+{% endif %}
