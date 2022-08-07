@@ -1,9 +1,15 @@
 <!DOCTYPE html>
+{% load static %}
+{% include "posts/includes/header.html" %}
 <html>
   <head>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <title>{{ title }}</title>
   </head>
   <body>
     <h1>{{ text }}</h1>
   </body>
+  {% block content %}
+  {% endblock content %}
+  {% include "posts/includes/footer.html" %}
 </html> 
