@@ -1,2 +1,0 @@
-# yatube
-Yatube project
