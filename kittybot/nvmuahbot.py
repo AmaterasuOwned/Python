@@ -1,9 +1,16 @@
 import requests
+import os
+
+from dotenv import load_dotenv
+
 from telegram import Bot, ReplyKeyboardMarkup
-from telegram.ext import Updater, Filters, MessageHandler, CommandHandler
+from telegram.ext import Updater, CommandHandler
 
 
-updater = Updater(token="5334912797:AAFpYMe5Po23KD8_k7s_PEpUtMH0E3w_bUU")
+load_dotenv()
+
+secret_token = os.getenv('TOKEN')
+
 URL = "https://api.thecatapi.com/v1/images/search"
 
 
@@ -32,18 +39,35 @@ def photo(update, context):
     button = ReplyKeyboardMarkup([['/Photo']], resize_keyboard=True)
     context.bot.send_message(
         chat_id=chat.id,
-        text="{},больше фото смотри на"
-        "https://vk.com/makeupbynatalia и "
-        "https://www.instagram.com/nvmuah/ ".format(name),
+        text="{}, портфолио : "
+        "http://nvmuah.tilda.ws/".format(name),
         reply_markup=button,
     )
 
 
-bot = Bot(token="5334912797:AAFpYMe5Po23KD8_k7s_PEpUtMH0E3w_bUU")
+def booking(update, context):
+    chat = update.effective_chat
+    name = update.message.chat.first_name
+    button = ReplyKeyboardMarkup([['/Booking']], resize_keyboard=True)
+    context.bot.send_message(
+        chat_id=chat.id,
+        text="{}, выберите дату для записи".format(name),
+        reply_markup=button,
+    )
 
-updater.dispatcher.add_handler(CommandHandler("Photo", photo))
 
-updater.dispatcher.add_handler(MessageHandler(Filters.text, say_hi))
+bot = Bot(token=secret_token)
 
-updater.start_polling(poll_interval=15.0)
-updater.idle()
+
+def main():
+    updater = Updater(token=secret_token)
+
+    updater.dispatcher.add_handler(CommandHandler('start', say_hi))
+    updater.dispatcher.add_handler(CommandHandler('Photo', photo))
+
+    updater.start_polling()
+    updater.idle()
+
+
+if __name__ == '__main__':
+    main()

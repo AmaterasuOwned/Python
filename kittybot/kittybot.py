@@ -1,16 +1,20 @@
+import logging
 import requests
 import os
 
 from dotenv import load_dotenv
 
 from telegram import Bot, ReplyKeyboardMarkup
-from telegram.ext import Updater, Filters, MessageHandler, CommandHandler
+from telegram.ext import Updater, CommandHandler
 
 load_dotenv()
 
 secret_token = os.getenv('TOKEN')
 
-updater = Updater(token=secret_token)
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO)
+
 URL = 'https://api.thecatapi.com/v1/images/search'
 
 
@@ -20,9 +24,14 @@ def say_hi(update, context):
 
 
 def get_new_image():
-    response = requests.get(URL).json()
-    random_cat = response[0].get('url')
-    return random_cat
+    try:
+        response = requests.get(URL).json()
+        random_cat = response[0].get('url')
+        return random_cat
+    except Exception as error:
+        logging.error(f'Ошибка при запросе к основному API: {error}')
+        new_url = 'https://api.thedogapi.com/v1/images/search'
+        response = requests.get(new_url)
 
 
 def new_cat(update, context):
@@ -43,9 +52,16 @@ def wake_up(update, context):
 
 bot = Bot(token=secret_token)
 
-updater.dispatcher.add_handler(CommandHandler("start", wake_up))
 
-updater.dispatcher.add_handler(MessageHandler(Filters.text, new_cat))
+def main():
+    updater = Updater(token=secret_token)
 
-updater.start_polling(poll_interval=15.0)
-updater.idle()
+    updater.dispatcher.add_handler(CommandHandler('start', wake_up))
+    updater.dispatcher.add_handler(CommandHandler('newcat', new_cat))
+
+    updater.start_polling()
+    updater.idle()
+
+
+if __name__ == '__main__':
+    main()
