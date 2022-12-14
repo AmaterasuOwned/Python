@@ -33,10 +33,35 @@ def start(message):
 
 @bot.message_handler()
 def func(message):
-    if message.text == "👋 Поздороваться":
+    if message.text == "👋 Поздороваться" or "Привет" or "привет":
         bot.send_message(
-            message.chat.id, text="Привет! Подробнее про меня http://nvmuah.tilda.ws/"
+            message.chat.id,
+            text="Привет! Я Наталья @NVMuah\n"
+            "Ваш гуру в мире макияжа\n"
+            "Подробнее про меня можно узнать:\n"
+            "Сайт http://nvmuah.tilda.ws/\n"
         )
+        keyboard1 = types.InlineKeyboardMarkup()
+        url_button = types.InlineKeyboardButton(
+            text="Instagram",
+            url="https://www.instagram.com/nvmuah/"
+        )
+        keyboard1.add(url_button)
+        bot.send_message(message.chat.id, 'Нажми 👇👇👇👇👇', reply_markup=keyboard1)
+        keyboard2 = types.InlineKeyboardMarkup()
+        url_button = types.InlineKeyboardButton(
+            text="Группа в VK",
+            url="https://vk.com/makeupbynatalia"
+        )
+        keyboard2.add(url_button)
+        bot.send_message(message.chat.id, 'Нажми 👇👇👇👇👇', reply_markup=keyboard2)
+        keyboard3 = types.InlineKeyboardMarkup()
+        url_button = types.InlineKeyboardButton(
+            text="Телеграмм канал",
+            url="https://t.me/+Ghjrdtv5DtM4MGJi"
+        )
+        keyboard3.add(url_button)
+        bot.send_message(message.chat.id, 'Нажми 👇👇👇👇👇', reply_markup=keyboard3)
     elif message.text == "Записаться":
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
         btn1 = types.KeyboardButton("Записаться на полный образ")
@@ -68,7 +93,46 @@ def func(message):
         )
         keyboard.add(url_button)
         bot.send_message(message.chat.id, "Написать мастеру", reply_markup=keyboard)
-
+    elif message.text == "образ":
+        img = open("E:\Dev\Bot\Photo_bot\Full.jpg", "rb")
+        bot.send_photo(message.chat.id, img)
+        bot.send_message(
+            message.chat.id,
+            text=(
+                "Полный образ включает в себя\n"
+                "Дневной или вечерний макияж\n"
+                "Локоны или причёска\n"
+                "Продолжительность - 2 часа\n\n"
+                "Цена - 4500 руб."
+            ),
+        )
+        keyboard = types.InlineKeyboardMarkup()
+        url_button = types.InlineKeyboardButton(
+            text="Написать мастеру",
+            url="https://api.whatsapp.com/send/?phone=79132004040&text&type=phone_number&app_absent=0"
+        )
+        keyboard.add(url_button)
+        bot.send_message(message.chat.id, "Написать мастеру", reply_markup=keyboard)
+    elif message.text == "макияж и прическа":
+        img = open("E:\Dev\Bot\Photo_bot\Full.jpg", "rb")
+        bot.send_photo(message.chat.id, img)
+        bot.send_message(
+            message.chat.id,
+            text=(
+                "Полный образ включает в себя\n"
+                "Дневной или вечерний макияж\n"
+                "Локоны или причёска\n"
+                "Продолжительность - 2 часа\n\n"
+                "Цена - 4500 руб."
+            ),
+        )
+        keyboard = types.InlineKeyboardMarkup()
+        url_button = types.InlineKeyboardButton(
+            text="Написать мастеру",
+            url="https://api.whatsapp.com/send/?phone=79132004040&text&type=phone_number&app_absent=0"
+        )
+        keyboard.add(url_button)
+        bot.send_message(message.chat.id, "Написать мастеру", reply_markup=keyboard)
     elif message.text == "Записаться на макияж":
         img = open("E:\Dev\Bot\Photo_bot\MakeUp.jpg", "rb")
         bot.send_photo(message.chat.id, img)
@@ -87,7 +151,23 @@ def func(message):
         )
         keyboard.add(url_button)
         bot.send_message(message.chat.id, "Написать мастеру", reply_markup=keyboard)
-
+        img = open("E:\Dev\Bot\Photo_bot\MakeUp.jpg", "rb")
+        bot.send_photo(message.chat.id, img)
+        bot.send_message(
+            message.chat.id,
+            text=(
+                "Дневной или вечерний макияж\n"
+                "Продолжительность - 1 час\n"
+                "Цена - 2500 руб.\n"
+            ),
+        )
+        keyboard = types.InlineKeyboardMarkup()
+        url_button = types.InlineKeyboardButton(
+            text="Написать мастеру",
+            url="https://api.whatsapp.com/send/?phone=79132004040&text&type=phone_number&app_absent=0"
+        )
+        keyboard.add(url_button)
+        bot.send_message(message.chat.id, "Написать мастеру", reply_markup=keyboard)
     elif message.text == "Записаться на укладку":
         img = open("E:\Dev\Bot\Photo_bot\hair.jpg", "rb")
         img2 = open("E:\Dev\Bot\Photo_bot\hair2.jpg", "rb")
@@ -119,6 +199,28 @@ def func(message):
         keyboard.add(url_button)
         bot.send_message(message.chat.id, "Написать мастеру", reply_markup=keyboard)
 
+        img = open("E:\Dev\Bot\Photo_bot\Wedding.jpg", "rb")
+        bot.send_photo(message.chat.id, img)
+        bot.send_message(
+            message.chat.id,
+            text=(
+                "Обсуждение и выбор свадебного макияжа и прически\n"
+                "Свадебный макияж\n"
+                "Свадебная причёска\n"
+                "Возможность выбрать украшения в причёску из имеющихся у мастера в ассортименте\n"
+                "Помощь в сборах(шнуровка платья, закрепление фоты и других украшений)\n"
+                "Возможность провести небольшую съёмку сборов, если Вас будет сопровождать фотограф\n\n"
+                "Цена - 6000 руб.\n"
+                "*выезд по городу 1000₽"
+            ),
+        )
+        keyboard = types.InlineKeyboardMarkup()
+        url_button = types.InlineKeyboardButton(
+            text="Написать мастеру",
+            url="https://api.whatsapp.com/send/?phone=79132004040&text&type=phone_number&app_absent=0"
+        )
+        keyboard.add(url_button)
+        bot.send_message(message.chat.id, "Написать мастеру", reply_markup=keyboard)    
     elif message.text == "Записаться на свадебный образ":
         img = open("E:\Dev\Bot\Photo_bot\Wedding.jpg", "rb")
         bot.send_photo(message.chat.id, img)
